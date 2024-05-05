@@ -1,0 +1,17 @@
+.navbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff; /* Set your preferred background color */
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+  }
+  
+  .nav-item {
+    text-decoration: none;
+    color: #333; /* Set your preferred text color */
+    font-size: 14px; /* Set your preferred font size */
+  }
+  
