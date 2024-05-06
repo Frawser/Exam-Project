@@ -1,5 +1,5 @@
-// MotivationSection.tsx
 import React from 'react';
+import '../../styles/common.css';
 
 const MotivationSection: React.FC = () => {
   // Example motivational content (replace with actual content)

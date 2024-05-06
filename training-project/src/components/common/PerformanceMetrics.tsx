@@ -1,5 +1,5 @@
-
 import React from 'react';
+import '../../styles/common.css';
 
 const PerformanceMetrics: React.FC = () => {
   // Example data (replace with actual data)

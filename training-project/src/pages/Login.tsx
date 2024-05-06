@@ -47,38 +47,35 @@ const Login: React.FC<LoginProps> = () => {
     }
   };
 
-  
-
-const handleRegisterSubmit = async (e: FormEvent) => {
-  e.preventDefault();
-  try {
-    // Send register request to backend
-    const response = await axios.post(
-      "http://localhost:5000/api/auth/register",
-      {
-        username,
-        email,
-        password,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
+  const handleRegisterSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    try {
+      // Send register request to backend
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/register",
+        {
+          username,
+          email,
+          password,
         },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const axiosError = error as AxiosError;
+        console.error("Axios error:", axiosError);
+        console.error("Axios response:", axiosError.response);
+      } else {
+        console.error("Other error:", error);
       }
-    );
-    console.log(response.data);
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      const axiosError = error as AxiosError;
-      console.error("Axios error:", axiosError);
-      console.error("Axios response:", axiosError.response);
-    } else {
-      console.error("Other error:", error);
+      // Handle error
     }
-    // Handle error
-  }
-};
-
+  };
   
 
   return (

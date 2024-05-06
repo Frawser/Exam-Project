@@ -1,25 +1,31 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import "../../styles/Navbar.css"
+import React from "react";
+import { Link } from "react-router-dom";
+import "../../styles/Navbar.css";
+
+//Icon imports
+import { FaChartLine } from "react-icons/fa6";
+import { FaUserFriends } from "react-icons/fa";
+import { FaPlusCircle } from "react-icons/fa";
+import { FaList } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
 
 const Navbar: React.FC = () => {
-  console.log("Navbar rendering...");
   return (
     <div className="navbar">
       <Link to="/dashboard" className="nav-item">
-        Dashboard
+        <FaChartLine />
       </Link>
       <Link to="/friendsystem" className="nav-item">
-        Friend System
+        <FaUserFriends />
       </Link>
       <Link to="/logworkout" className="nav-item">
-        Log Workout
+        <FaPlusCircle />
       </Link>
       <Link to="/workoutlist" className="nav-item">
-        Workout List
+        <FaList />
       </Link>
       <Link to="/myprofile" className="nav-item">
-        My Profile
+        <FaUser />
       </Link>
     </div>
   );

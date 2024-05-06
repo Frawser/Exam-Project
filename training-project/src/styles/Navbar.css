@@ -3,7 +3,7 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #fff; /* Set your preferred background color */
+    background-color: #1E1F1A;
     display: flex;
     justify-content: space-around;
     padding: 10px 0;
@@ -11,7 +11,8 @@
   
   .nav-item {
     text-decoration: none;
-    color: #333; /* Set your preferred text color */
-    font-size: 14px; /* Set your preferred font size */
+    color: #FCA311; 
+    font-size: 40px;
+    margin-top: 6px; 
   }
   
