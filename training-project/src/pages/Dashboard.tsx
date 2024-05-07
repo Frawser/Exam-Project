@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TrainingProgress from '../components/common/TrainingProgress';
-import UpcomingSessions from '../components/common/UpcomingSessions';
-import PerformanceMetrics from '../components/common/PerformanceMetrics';
 import PersonalRecords from '../components/common/PersonalRecords';
 import MotivationSection from '../components/common/MotivationSection';
+import WieghtTracker from '../components/common/WieghtTracker';
 
 const Dashboard: React.FC = () => {
   const [userId, setUserId] = useState<string>('');
@@ -31,19 +30,12 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="dashboard-container">
-      {/* Training Progress */}
       <TrainingProgress userId={userId} />
 
-      {/* Upcoming Sessions */}
-      <UpcomingSessions />
+      <WieghtTracker userId={userId}/>
 
-      {/* Performance Metrics */}
-      <PerformanceMetrics />
+      <PersonalRecords userId={userId}/>
 
-      {/* Personal Records */}
-      <PersonalRecords />
-
-      {/* Motivation Section */}
       <MotivationSection />
     </div>
   );

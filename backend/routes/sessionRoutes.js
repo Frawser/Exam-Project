@@ -4,15 +4,15 @@ const Session = require('../models/Session');
 
 // Create a new session
 router.post('/', async (req, res) => {
-  const { userId, duration } = req.body;
+  const { userId } = req.body;
 
   try {
     // Validate input data
-    if (!userId || !duration) {
-      return res.status(400).json({ message: 'Both userId and duration are required' });
+    if (!userId) {
+      return res.status(400).json({ message: 'userId is required' });
     }
 
-    const session = new Session({ userId, duration });
+    const session = new Session({ userId });
     await session.save();
     res.status(201).json({ message: 'Session created successfully', session });
   } catch (error) {
@@ -20,6 +20,7 @@ router.post('/', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
 
 // Get all sessions for a user
 router.get('/:userId', async (req, res) => {

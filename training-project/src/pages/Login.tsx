@@ -3,7 +3,6 @@ import "../styles/Login.css";
 import backgroundImage from "../assets/images/background.jpg";
 import axios from "axios"; 
 import { useNavigate } from "react-router";
-import { AxiosError } from 'axios';
 
 interface LoginProps {}
 
@@ -40,7 +39,10 @@ const Login: React.FC<LoginProps> = () => {
         email,
         password,
       });
-      console.log(response.data);
+
+      // Store token in localStorage
+      localStorage.setItem('token', response.data.token);
+
       navigate('/dashboard'); // Navigate to dashboard on successful login
     } catch (error) {
       setError("Invalid credentials");
@@ -66,17 +68,9 @@ const Login: React.FC<LoginProps> = () => {
       );
       console.log(response.data);
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const axiosError = error as AxiosError;
-        console.error("Axios error:", axiosError);
-        console.error("Axios response:", axiosError.response);
-      } else {
-        console.error("Other error:", error);
-      }
-      // Handle error
+      setError("Error registering user");
     }
   };
-  
 
   return (
     <div className="login-container">

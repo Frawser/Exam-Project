@@ -3,8 +3,9 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const jwtSecret = process.env.JWT_SECRET;
 
-//Register
+// Register
 router.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -47,11 +48,11 @@ router.post('/login', async (req, res) => {
     }
 
     // Generate JWT token
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '5h' });
 
     res.json({ token });
   } catch (error) {
-    console.error(error);
+    console.error('Error logging in:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -64,7 +65,7 @@ router.get('/me', async (req, res) => {
       return res.status(401).json({ message: 'No token provided' });
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, jwtSecret);
     if (!decoded.userId) {
       return res.status(401).json({ message: 'Invalid token' });
     }
