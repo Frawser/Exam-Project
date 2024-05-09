@@ -67,7 +67,7 @@ const TrainingProgress: React.FC<TrainingProgressProps> = ({ userId }) => {
 
   return (
     <div className="training-progress-container inter-font">
-      <h2>Training Progress</h2>
+      <h2 className='border-btm'>Training Progress</h2>
       <div>Total Sessions: {totalSessions}</div>
       <div className="button-container-progress">
         <button onClick={handleRemoveSession} className='icon-button'><FaMinusCircle /></button>

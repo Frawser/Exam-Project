@@ -7,6 +7,7 @@ const sessionRoutes = require('./routes/sessionRoutes');
 const weightRoutes = require('./routes/weightRoutes');
 const personalRecordsRoutes = require('./routes/personalRecordsRoutes');
 
+
 const app = express();
 
 // Middleware

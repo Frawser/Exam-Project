@@ -12,6 +12,7 @@ const Login: React.FC<LoginProps> = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [nickname, setNickname] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -48,7 +49,6 @@ const Login: React.FC<LoginProps> = () => {
       setError("Invalid credentials");
     }
   };
-
   const handleRegisterSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
@@ -59,6 +59,7 @@ const Login: React.FC<LoginProps> = () => {
           username,
           email,
           password,
+          nickname,
         },
         {
           headers: {
@@ -67,6 +68,11 @@ const Login: React.FC<LoginProps> = () => {
         }
       );
       console.log(response.data);
+  
+      // Show login form after successful registration
+      setShowLoginForm(true);
+      setShowRegisterForm(false);
+      setError(""); // Clear any previous errors
     } catch (error) {
       setError("Error registering user");
     }
@@ -127,6 +133,15 @@ const Login: React.FC<LoginProps> = () => {
                 value={username}
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   setUsername(e.target.value)
+                }
+              />
+              <input
+                type="text"
+                placeholder="Nickname..."
+                className="input-field inter-font"
+                value={nickname}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setNickname(e.target.value)
                 }
               />
               <input

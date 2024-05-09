@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TrainingProgress from '../components/common/TrainingProgress';
 import PersonalRecords from '../components/common/PersonalRecords';
-import MotivationSection from '../components/common/MotivationSection';
 import WieghtTracker from '../components/common/WieghtTracker';
+import '../styles/Dashboard.css';
 
 const Dashboard: React.FC = () => {
   const [userId, setUserId] = useState<string>('');
@@ -35,8 +35,6 @@ const Dashboard: React.FC = () => {
       <WieghtTracker userId={userId}/>
 
       <PersonalRecords userId={userId}/>
-
-      <MotivationSection />
     </div>
   );
 };

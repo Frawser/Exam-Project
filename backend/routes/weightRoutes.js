@@ -35,4 +35,17 @@ router.get('/:userId', async (req, res) => {
   }
 });
 
+// Get the latest weight entry for a user
+router.get('/latest/:userId', async (req, res) => {
+  const userId = req.params.userId;
+
+  try {
+    const latestWeight = await Weight.findOne({ userId }).sort({ createdAt: -1 }).limit(1);
+    res.json(latestWeight);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 module.exports = router;

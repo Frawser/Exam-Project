@@ -3,11 +3,13 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
-const jwtSecret = process.env.JWT_SECRET;
+const jwtSecret = 'secret';
+const authController = require('../controllers/authController');
 
+router.put('/image', authController.updateProfilePicture);
 // Register
 router.post('/register', async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, nickname } = req.body;
 
   try {
     // Check if user already exists
@@ -20,7 +22,7 @@ router.post('/register', async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create user
-    const user = new User({ username, email, password: hashedPassword });
+    const user = new User({ username, email, password: hashedPassword, nickname });
     await user.save();
 
     res.status(201).json({ message: 'User registered successfully' });
@@ -78,6 +80,43 @@ router.get('/me', async (req, res) => {
     }
     res.status(500).json({ message: 'Server error' });
   }
+});
+
+// Get user data by user ID
+router.get('/:userId', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json(user);
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Update user nickname
+router.put('/nickname', async (req, res) => {
+  const { userId, nickname } = req.body;
+
+  try {
+    const user = await User.findByIdAndUpdate(userId, { nickname }, { new: true });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json({ message: 'Nickname updated successfully', user });
+  } catch (error) {
+    console.error('Error updating nickname:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
+router.post('/logout', (req, res) => {
+  res.status(200).json({ message: 'Logged out successfully' });
 });
 
 module.exports = router;

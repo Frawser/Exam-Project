@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { Chart, ChartConfiguration, registerables, Plugin } from 'chart.js';
+import { Chart, registerables } from 'chart.js/auto'; // Import Chart.js with auto module
+import 'chartjs-adapter-date-fns'; // Import and register the date-fns adapter
 import '../../styles/common.css';
+
+Chart.register(...registerables);
 
 interface PersonalRecord {
   userId: string;
@@ -24,7 +27,7 @@ const PersonalRecords: React.FC<Props> = ({ userId }) => {
 
   const fetchPersonalRecords = async () => {
     try {
-      const response = await axios.get<PersonalRecord[]>(`http://localhost:5000/api/personal-records/${userId}`);
+      const response = await axios.get<PersonalRecord[]>(`http://localhost:5000/api/personal-records/user/${userId}`);
       setError('');
       setSelectedExerciseData(response.data);
       setFetchCount(fetchCount + 1);
@@ -33,36 +36,37 @@ const PersonalRecords: React.FC<Props> = ({ userId }) => {
       setError('Error fetching personal records');
     }
   };
+  
 
   const createChart = () => {
     if (!selectedExerciseData || selectedExerciseData.length === 0) return;
-
+  
     const personalBests: { [key: string]: number } = {};
     const dates: string[] = [];
-
-    selectedExerciseData.forEach(record => {
+    const filteredData = selectedExerciseData.filter(record => record.exercise === selectedExercise);
+  
+    filteredData.forEach(record => {
       personalBests[record.exercise] = record.value;
       dates.push(record.createdAt); // Use createdAt field for dates
     });
-
+  
     if (personalBestChart.current) {
       personalBestChart.current.destroy();
     }
-
+  
     const ctx = document.getElementById('personalBestChart') as HTMLCanvasElement;
     if (ctx) {
-      const plugins: Plugin<"line", ChartConfiguration<"line">>[] = registerables.map(plugin => plugin as Plugin<"line", ChartConfiguration<"line">>);
-      const chartConfig: ChartConfiguration<'line'> = {
+      personalBestChart.current = new Chart(ctx, {
         type: 'line',
         data: {
           labels: dates,
-          datasets: Object.keys(personalBests).map(exercise => ({
-            label: `${exercise} Personal Best (kg)`,
-            data: selectedExerciseData.filter(record => record.exercise === exercise).map(record => record.value),
+          datasets: [{
+            label: `${selectedExercise} Personal Best (kg)`,
+            data: filteredData.map(record => record.value),
             fill: false,
             borderColor: 'rgb(252, 163, 17)',
             tension: 0.1,
-          })),
+          }],
         },
         options: {
           maintainAspectRatio: false,
@@ -75,18 +79,18 @@ const PersonalRecords: React.FC<Props> = ({ userId }) => {
               time: {
                 unit: 'day', // Display date labels by day
                 displayFormats: {
-                  day: 'MMM D', // Format: Jan 1
+                  day: 'MMM d', // Format: Jan 1
                 },
               },
+              position: 'bottom', // Display dates at the bottom of the chart
             },
           },
         },
-        plugins: plugins,
-      };
-
-      personalBestChart.current = new Chart(ctx, chartConfig);
+      });
     }
   };
+  
+  
 
   const handleExerciseChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedExercise(event.target.value);
@@ -123,30 +127,31 @@ const PersonalRecords: React.FC<Props> = ({ userId }) => {
   }, [userId, fetchCount, selectedExercise]);
 
   return (
-    <div className="personal-records">
-      <h2>Personal Records</h2>
-      <label>
-        Select Exercise:
-        <select value={selectedExercise} onChange={handleExerciseChange}>
-          <option value="">Select Exercise</option>
-          <option value="deadlift">Deadlift</option>
-          <option value="benchPress">Bench Press</option>
-          <option value="squat">Squat</option>
-        </select>
-      </label>
-      <br />
+    <div className="personal-records inter-font">
+      <h2 className="title-PB">Personal Records</h2>
+      <div className="select-container-PB">
+        <label className='border-tp-pb'>
+          Select Exercise:
+          <select className='select-PB' value={selectedExercise} onChange={handleExerciseChange}>
+            <option value="">Select Exercise</option>
+            <option value="deadlift">Deadlift</option>
+            <option value="benchPress">Bench Press</option>
+            <option value="squat">Squat</option>
+          </select>
+        </label>
+      </div>
       {selectedExercise && (
-        <div>
+        <div className="form-container-PB">
           <label>
             New Personal Best:
-            <input type="text" value={newPersonalBest} onChange={handleInputChange} />
+            <input type="text" className='input-PB' value={newPersonalBest} onChange={handleInputChange} />
           </label>
-          <button onClick={handleUpdatePersonalBest}>Submit</button>
+          <button className="button-PB" onClick={handleUpdatePersonalBest}>Submit</button>
         </div>
       )}
-      {error && <div>Error: {error}</div>}
-      <div className="personal-best-chart-container">
-        <canvas id="personalBestChart" className="personal-best-chart" />
+      {error && <div className="error-PB">Error: {error}</div>}
+      <div className="chart-container-PB">
+        <canvas id="personalBestChart" className="chart-PB" />
       </div>
     </div>
   );

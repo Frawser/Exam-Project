@@ -102,9 +102,9 @@ const WeightTracker: React.FC<WeightTrackerProps> = ({ userId }) => {
 
   return (
     <div className="weight-tracker inter-font">
-      <h2>Weight Tracker</h2>
+      <h2 className="weight-title">Weight Tracker</h2>
       <form onSubmit={handleSubmit} className="weight-tracker_form">
-        <label className="weight-tracker_label">
+        <label className="weight-tracker_label border-tp">
           Weight (kg):
           <input
             type="number"
