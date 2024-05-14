@@ -1,29 +1,28 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const Session = require('../models/Session');
+const Session = require("../models/Session");
 
 // Create a new session
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
   const { userId } = req.body;
 
   try {
     // Validate input data
     if (!userId) {
-      return res.status(400).json({ message: 'userId is required' });
+      return res.status(400).json({ message: "userId is required" });
     }
 
     const session = new Session({ userId });
     await session.save();
-    res.status(201).json({ message: 'Session created successfully', session });
+    res.status(201).json({ message: "Session created successfully", session });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: "Server error" });
   }
 });
 
-
 // Get all sessions for a user
-router.get('/:userId', async (req, res) => {
+router.get("/:userId", async (req, res) => {
   const userId = req.params.userId;
 
   try {
@@ -31,45 +30,49 @@ router.get('/:userId', async (req, res) => {
     res.json(sessions);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: "Server error" });
   }
 });
 
 // Delete a session
-router.delete('/:sessionId', async (req, res) => {
+router.delete("/:sessionId", async (req, res) => {
   const sessionId = req.params.sessionId;
 
   try {
     const deletedSession = await Session.findByIdAndDelete(sessionId);
     if (!deletedSession) {
-      return res.status(404).json({ message: 'Session not found' });
+      return res.status(404).json({ message: "Session not found" });
     }
-    res.json({ message: 'Session deleted successfully' });
+    res.json({ message: "Session deleted successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: "Server error" });
   }
 });
 
 // Update a session
-router.put('/:sessionId', async (req, res) => {
+router.put("/:sessionId", async (req, res) => {
   const sessionId = req.params.sessionId;
   const { duration } = req.body;
 
   try {
     // Validate input data
     if (!duration) {
-      return res.status(400).json({ message: 'Duration is required' });
+      return res.status(400).json({ message: "Duration is required" });
     }
 
-    const updatedSession = await Session.findByIdAndUpdate(sessionId, { duration }, { new: true });
+    const updatedSession = await Session.findByIdAndUpdate(
+      sessionId,
+      { duration },
+      { new: true }
+    );
     if (!updatedSession) {
-      return res.status(404).json({ message: 'Session not found' });
+      return res.status(404).json({ message: "Session not found" });
     }
-    res.json({ message: 'Session updated successfully', updatedSession });
+    res.json({ message: "Session updated successfully", updatedSession });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: "Server error" });
   }
 });
 

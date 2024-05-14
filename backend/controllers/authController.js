@@ -1,6 +1,4 @@
-// controllers/authController.js
-
-const User = require('../models/User'); // Import User model
+const User = require('../models/User'); 
 
 exports.updateProfilePicture = async (req, res) => {
     try {

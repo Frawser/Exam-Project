@@ -1,0 +1,84 @@
+@media screen and (max-width: 768px) {
+  .previous-log {
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #1e1f1a;
+    color: #ffffff;
+    margin: 1rem 1rem 8rem 1rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80%;
+  }
+
+  .previous-log-title {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .previous-log ul {
+    padding: 0;
+    text-align: left;
+    margin-left: 20%;
+  }
+
+  .previous-log.loading {
+    text-align: center;
+  }
+
+  .sets-list {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .sets-list li {
+    color: #ffffff;
+    margin-bottom: 1rem;
+  }
+
+  .set-info {
+    font-size: 14px;
+    color: #ffffff;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .previous-log {
+    max-width: 700px;
+    padding: 20px;
+    margin-bottom: 30px;
+    background-color: #1e1f1a;
+    color: #ffffff;
+    margin: 1rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+  }
+
+  .previous-log-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .sets-list {
+    list-style-type: none;
+    padding: 0;
+    text-align: left; /* Align list items to the left */
+  }
+
+  .sets-list li {
+    margin-bottom: 1rem;
+  }
+  .previous-log ul {
+    padding: 0;
+    text-align: left;
+    margin: 1rem;
+  }
+
+  .set-info {
+    font-size: 14px;
+  }
+}

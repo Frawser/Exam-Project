@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "../../styles/ProfileHeader.css";
 
 // Import avatars
 import avatar from "../../assets/usericons/avataaars.png";
@@ -21,7 +22,7 @@ interface UserData {
   _id: string;
   username: string;
   nickname: string;
-  image?: string; // Optional image field
+  image?: string;
 }
 
 const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user, setUser }) => {
@@ -61,7 +62,6 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user, setUser }) => {
         setUser(updatedUser);
         setError("");
         setSelectedImage(updatedUser.image || "");
-        console.log("Profile picture updated successfully");
       }
     } catch (error) {
       console.error("Error updating profile picture:", error);
@@ -75,7 +75,6 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user, setUser }) => {
         `http://localhost:5000/api/weight/latest/${user._id}`
       );
       setLatestWeight(response.data);
-      console.log("Latest Weight:", response.data);
     } catch (error) {
       console.error("Error fetching latest weight:", error);
     }
@@ -105,7 +104,6 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user, setUser }) => {
         setNewNickname("");
         setNicknameChanged(false);
         setError("");
-        console.log("Nickname updated successfully");
         setEditMode(false);
       }
     } catch (error) {
@@ -171,14 +169,13 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user, setUser }) => {
               <p className="nickname">{user.nickname}</p>
             )}
             <div className="weight-info">
-            {latestWeight ? (
-              <p>{latestWeight.weight} kg</p>
-            ) : (
-              <p>No weight data available</p>
-            )}
+              {latestWeight ? (
+                <p>{latestWeight.weight} kg</p>
+              ) : (
+                <p>No weight data available</p>
+              )}
+            </div>
           </div>
-          </div>
-          
         </div>
       </div>
       <div className="edit-mode">

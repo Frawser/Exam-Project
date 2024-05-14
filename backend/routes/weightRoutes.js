@@ -4,7 +4,7 @@ const Weight = require('../models/Weight');
 
 // Add weight
 router.post('/', async (req, res) => {
-  const { userId, weight: userWeight } = req.body; // Changed variable name to userWeight
+  const { userId, weight: userWeight } = req.body; 
 
   try {
     // Validate input data
@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
       return res.status(400).json({ message: 'Both userId and weight are required' });
     }
 
-    const newWeight = new Weight({ userId, weight: userWeight }); // Changed variable name to userWeight
+    const newWeight = new Weight({ userId, weight: userWeight });
     await newWeight.save();
     res.status(201).json({ message: 'Weight added successfully', weight: newWeight });
     console.log('Weight added successfully');
@@ -27,8 +27,8 @@ router.get('/:userId', async (req, res) => {
   const userId = req.params.userId;
 
   try {
-    const weights = await Weight.find({ userId }); // Changed variable name to weights
-    res.json(weights); // Changed variable name to weights
+    const weights = await Weight.find({ userId }); 
+    res.json(weights); 
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });

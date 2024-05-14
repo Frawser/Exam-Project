@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { Chart } from "chart.js/auto";
-import "../../styles/common.css";
+import { Chart, ChartOptions } from "chart.js";
+import "../../styles/WieghtTracker.css";
 
 interface WeightEntry {
   weight: number;
@@ -13,11 +13,10 @@ interface WeightTrackerProps {
 }
 
 const WeightTracker: React.FC<WeightTrackerProps> = ({ userId }) => {
-  const [weight, setWeight] = useState<number | "">(0);
+  const [weight, setWeight] = useState<string>("");
   const [error, setError] = useState<string>("");
-  const [weightData, setWeightData] = useState<WeightEntry[]>([]);
-  const weightChart = useRef<Chart<"line"> | null>(null);
-  const [fetchCount, setFetchCount] = useState<number>(0);
+  const [, setWeightData] = useState<WeightEntry[]>([]);
+  const weightChart = useRef<Chart | null>(null);
 
   const fetchWeightData = async () => {
     try {
@@ -25,9 +24,8 @@ const WeightTracker: React.FC<WeightTrackerProps> = ({ userId }) => {
         `http://localhost:5000/api/weight/${userId}`
       );
       setWeightData(response.data);
-      setError(""); // Clear error state on successful fetch
-      createChart(); // Create or update the chart with the new data
-      setFetchCount(fetchCount + 1); // Increment fetch count
+      setError("");
+      createChart(response.data);
     } catch (error) {
       console.error("Error fetching weight data:", error);
       setError("Error fetching weight data");
@@ -35,29 +33,29 @@ const WeightTracker: React.FC<WeightTrackerProps> = ({ userId }) => {
   };
 
   useEffect(() => {
-    if (userId && fetchCount < 2) {
+    if (userId) {
       fetchWeightData();
     }
-  }, [userId, fetchCount]);
+  }, [userId]);
 
-  const createChart = () => {
-    if (!weightData) return;
+  const createChart = (data: WeightEntry[]) => {
+    if (!data) return;
 
-    if (weightChart.current) {
-      weightChart.current.destroy();
-    }
     const ctx = document.getElementById("weightChart") as HTMLCanvasElement;
     if (ctx) {
+      if (weightChart.current) {
+        weightChart.current.destroy();
+      }
       weightChart.current = new Chart(ctx, {
         type: "line",
         data: {
-          labels: weightData.map((entry) =>
+          labels: data.map((entry) =>
             new Date(entry.createdAt).toLocaleDateString()
           ),
           datasets: [
             {
               label: "Weight (kg)",
-              data: weightData.map((entry) => entry.weight),
+              data: data.map((entry) => entry.weight),
               fill: false,
               borderColor: "rgb(252, 163, 17)",
               tension: 0.1,
@@ -67,9 +65,9 @@ const WeightTracker: React.FC<WeightTrackerProps> = ({ userId }) => {
         options: {
           maintainAspectRatio: false,
           animation: {
-            duration: 0, // Disable animation
+            duration: 0,
           },
-        },
+        } as ChartOptions,
       });
     }
   };
@@ -84,16 +82,16 @@ const WeightTracker: React.FC<WeightTrackerProps> = ({ userId }) => {
       }
       await axios.post(
         "http://localhost:5000/api/weight",
-        { userId, weight },
+        { userId, weight: parseFloat(weight) },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      setWeight(""); // Reset weight after successful submission
+      setWeight("");
       setError("");
-      setFetchCount(fetchCount + 1); // Increment fetch count after submission
+      fetchWeightData();
     } catch (error) {
       console.error("Error adding weight:", error);
       setError("Error adding weight");
@@ -104,20 +102,20 @@ const WeightTracker: React.FC<WeightTrackerProps> = ({ userId }) => {
     <div className="weight-tracker inter-font">
       <h2 className="weight-title">Weight Tracker</h2>
       <form onSubmit={handleSubmit} className="weight-tracker_form">
-        <label className="weight-tracker_label border-tp">
+        <label className="weight-tracker_label">
           Weight (kg):
           <input
-            type="number"
+            type="text"
+            pattern="[0-9]*(\.[0-9]+)?"
             className="weight-tracker_input"
-            value={weight === "" ? "" : weight}
-            onChange={(e) => {
-              const value = e.target.value.trim(); // Trim leading/trailing whitespace
-              setWeight(value !== "" ? parseInt(value) : ""); // Parse only if not empty
-            }}
+            value={weight}
+            onChange={(e) => setWeight(e.target.value)}
             required
           />
         </label>
-        <button type="submit" className="weight-tracker_submit-btn">Submit</button>
+        <button type="submit" className="weight-tracker_submit-btn">
+          Submit
+        </button>
       </form>
       {error && <div className="weight-tracker_error">Error: {error}</div>}
       <div className="weight-tracker_chart-container">

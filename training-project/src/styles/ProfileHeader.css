@@ -1,0 +1,205 @@
+/* MY Profile */
+@media screen and (max-width: 769px) {
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media screen and (min-width: 770px) {
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5rem;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .profile-header {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background-color: #1e1f1a;
+    color: white;
+    margin: 1rem;
+  }
+
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .profile-info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .nickname {
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+
+  .username {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 10px;
+  }
+
+  .bio {
+    margin-bottom: 10px;
+  }
+
+  .edit-mode {
+    margin-top: 10px;
+    border-top: 1px solid #ccc;
+    padding-top: 15px;
+  }
+
+  .edit-nickname {
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+
+  .edit-image {
+    margin-bottom: 10px;
+  }
+
+  .edit-button,
+  .change-nickname,
+  .change-image,
+  .save-button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #fca311;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  .cancel-button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #fc4811;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .error-message {
+    color: red;
+    margin-top: 10px;
+  }
+
+  .profile-placeholder {
+    width: 100px;
+    height: auto;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+
+  .profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+}
+
+@media screen and (min-width: 770px) {
+  .profile-header {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background-color: #1e1f1a;
+    color: white;
+    margin: 1rem;
+    max-width: 800px;
+  }
+
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .profile-info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .nickname {
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+
+  .username {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 10px;
+  }
+
+  .bio {
+    margin-bottom: 10px;
+  }
+
+  .edit-mode {
+    margin-top: 10px;
+    border-top: 1px solid #ccc;
+    padding-top: 15px;
+  }
+
+  .edit-nickname {
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+
+  .edit-image {
+    margin-bottom: 10px;
+  }
+
+  .edit-button,
+  .change-nickname,
+  .change-image,
+  .save-button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #fca311;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .cancel-button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #fc4811;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .error-message {
+    color: red;
+    margin-top: 10px;
+  }
+
+  .profile-placeholder {
+    width: 100px;
+    height: auto;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+
+  .profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+}

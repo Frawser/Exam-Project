@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import "../styles/Login.css";
 import backgroundImage from "../assets/images/background.jpg";
-import axios from "axios"; 
+import axios from "axios";
 import { useNavigate } from "react-router";
 
 interface LoginProps {}
@@ -35,16 +35,17 @@ const Login: React.FC<LoginProps> = () => {
   const handleLoginSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      // Send login request to backend
-      const response = await axios.post("http://localhost:5000/api/auth/login", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/login",
+        {
+          email,
+          password,
+        }
+      );
 
-      // Store token in localStorage
-      localStorage.setItem('token', response.data.token);
+      localStorage.setItem("token", response.data.token);
 
-      navigate('/dashboard'); // Navigate to dashboard on successful login
+      navigate("/dashboard");
     } catch (error) {
       setError("Invalid credentials");
     }
@@ -52,7 +53,6 @@ const Login: React.FC<LoginProps> = () => {
   const handleRegisterSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      // Send register request to backend
       const response = await axios.post(
         "http://localhost:5000/api/auth/register",
         {
@@ -68,11 +68,10 @@ const Login: React.FC<LoginProps> = () => {
         }
       );
       console.log(response.data);
-  
-      // Show login form after successful registration
+
       setShowLoginForm(true);
       setShowRegisterForm(false);
-      setError(""); // Clear any previous errors
+      setError("");
     } catch (error) {
       setError("Error registering user");
     }
@@ -91,10 +90,16 @@ const Login: React.FC<LoginProps> = () => {
         <div className="button-container">
           {!showLoginForm && !showRegisterForm && (
             <div>
-              <button className="l-button inter-font" onClick={handleLoginClick}>
+              <button
+                className="l-button inter-font"
+                onClick={handleLoginClick}
+              >
                 LOGIN
               </button>
-              <button className="l-button inter-font" onClick={handleRegisterClick}>
+              <button
+                className="l-button inter-font"
+                onClick={handleRegisterClick}
+              >
                 REGISTER
               </button>
             </div>

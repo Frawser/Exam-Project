@@ -1,14 +1,14 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const personalRecordSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
     required: true,
   },
   exercise: {
     type: String,
-    enum: ['deadlift', 'benchPress', 'squat'],
+    enum: ["deadlift", "benchPress", "squat"],
     required: true,
   },
   value: {
@@ -21,6 +21,6 @@ const personalRecordSchema = new mongoose.Schema({
   },
 });
 
-const PersonalRecord = mongoose.model('PersonalRecord', personalRecordSchema);
+const PersonalRecord = mongoose.model("PersonalRecord", personalRecordSchema);
 
 module.exports = PersonalRecord;

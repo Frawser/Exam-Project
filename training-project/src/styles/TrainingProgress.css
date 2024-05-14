@@ -1,0 +1,95 @@
+/* Training progress styles */
+@media screen and (max-width: 768px) {
+  .training-progress-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    flex-direction: column;
+    background-color: #1e1f1a;
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    height: 10rem;
+    margin: 1rem;
+    width: 80%;
+  }
+
+  .button-container-progress {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .border-btm {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+  }
+
+  .border-tp {
+    border-top: 1px solid #ccc;
+    padding-top: 7px;
+  }
+
+  .icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 2.7rem;
+    color: #fca311;
+  }
+
+  .icon-button:focus {
+    outline: none;
+  }
+
+  .error-message {
+    color: red;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .training-progress-container {
+    width: 60%;
+    height: 15rem;
+    margin: 2rem auto;
+    padding: 30px;
+    background-color: #1e1f1a;
+    border-radius: 10px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+  }
+
+  .button-container-progress {
+    margin-top: 20px;
+  }
+
+  .border-btm {
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+    width: 60%;
+    text-align: center;
+    font-size: 2rem;
+  }
+
+  .border-tp {
+    border-top: 2px solid #ccc;
+    padding-top: 12px;
+  }
+
+  .icon-button {
+    font-size: 3.2rem;
+    color: #fca311;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .error-message {
+    margin-top: 15px;
+  }
+}

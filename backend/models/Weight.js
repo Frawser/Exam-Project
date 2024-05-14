@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const weightSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User', 
+    ref: "User",
     required: true,
   },
   weight: {
@@ -16,6 +16,6 @@ const weightSchema = new mongoose.Schema({
   },
 });
 
-const Weight = mongoose.model('Weight', weightSchema);
+const Weight = mongoose.model("Weight", weightSchema);
 
 module.exports = Weight;

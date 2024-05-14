@@ -15,31 +15,56 @@ interface UserStatsProps {
 }
 
 const UserStats: React.FC<UserStatsProps> = ({ userId }) => {
-  const [latestRecords, setLatestRecords] = useState<Record<string, ExerciseRecord> | null>(null);
-  const [firstRecords, setFirstRecords] = useState<Record<string, ExerciseRecord> | null>(null);
+  const [latestRecords, setLatestRecords] = useState<Record<
+    string,
+    ExerciseRecord
+  > | null>(null);
+  const [firstRecords, setFirstRecords] = useState<Record<
+    string,
+    ExerciseRecord
+  > | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchRecords = async () => {
       try {
-        const [latestDeadlift, latestBenchpress, latestSquat, firstDeadlift, firstBenchpress, firstSquat] = await Promise.all([
-          axios.get<ExerciseRecord>(`http://localhost:5000/api/personal-records/latest/deadlift/${userId}`),
-          axios.get<ExerciseRecord>(`http://localhost:5000/api/personal-records/latest/benchpress/${userId}`),
-          axios.get<ExerciseRecord>(`http://localhost:5000/api/personal-records/latest/squat/${userId}`),
-          axios.get<ExerciseRecord>(`http://localhost:5000/api/personal-records/first/deadlift/${userId}`),
-          axios.get<ExerciseRecord>(`http://localhost:5000/api/personal-records/first/benchpress/${userId}`),
-          axios.get<ExerciseRecord>(`http://localhost:5000/api/personal-records/first/squat/${userId}`),
+        const [
+          latestDeadlift,
+          latestBenchpress,
+          latestSquat,
+          firstDeadlift,
+          firstBenchpress,
+          firstSquat,
+        ] = await Promise.all([
+          axios.get<ExerciseRecord>(
+            `http://localhost:5000/api/personal-records/latest/deadlift/${userId}`
+          ),
+          axios.get<ExerciseRecord>(
+            `http://localhost:5000/api/personal-records/latest/benchpress/${userId}`
+          ),
+          axios.get<ExerciseRecord>(
+            `http://localhost:5000/api/personal-records/latest/squat/${userId}`
+          ),
+          axios.get<ExerciseRecord>(
+            `http://localhost:5000/api/personal-records/first/deadlift/${userId}`
+          ),
+          axios.get<ExerciseRecord>(
+            `http://localhost:5000/api/personal-records/first/benchpress/${userId}`
+          ),
+          axios.get<ExerciseRecord>(
+            `http://localhost:5000/api/personal-records/first/squat/${userId}`
+          ),
         ]);
 
         setLatestRecords({
           deadlift: latestDeadlift.data,
-          benchPress: latestBenchpress.data, // Corrected typo here
+          benchPress: latestBenchpress.data,
           squat: latestSquat.data,
         });
 
         setFirstRecords({
           deadlift: firstDeadlift.data,
-          benchPress: firstBenchpress.data, // Corrected typo here
+          benchPress: firstBenchpress.data,
           squat: firstSquat.data,
         });
 
@@ -78,15 +103,21 @@ const UserStats: React.FC<UserStatsProps> = ({ userId }) => {
             <ul className="ul-container-1">
               <li className="li-stats">
                 <span className="record-label">Deadlift:</span>{" "}
-                {latestRecords.deadlift?.value !== undefined ? `${latestRecords.deadlift.value} kg` : "N/A"}
+                {latestRecords.deadlift?.value !== undefined
+                  ? `${latestRecords.deadlift.value} kg`
+                  : "N/A"}
               </li>
               <li className="li-stats">
                 <span className="record-label">Benchpress:</span>{" "}
-                {latestRecords.benchPress?.value !== undefined ? `${latestRecords.benchPress.value} kg` : "N/A"}
+                {latestRecords.benchPress?.value !== undefined
+                  ? `${latestRecords.benchPress.value} kg`
+                  : "N/A"}
               </li>
               <li className="li-stats">
                 <span className="record-label">Squat:</span>{" "}
-                {latestRecords.squat?.value !== undefined ? `${latestRecords.squat.value} kg` : "N/A"}
+                {latestRecords.squat?.value !== undefined
+                  ? `${latestRecords.squat.value} kg`
+                  : "N/A"}
               </li>
             </ul>
           </div>

@@ -1,19 +1,95 @@
+/* Navbar CSS */
 .navbar {
+  display: flex;
+  justify-content: space-around;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #1e1f1a;
+  padding: 1rem 0;
+  z-index: 1000;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: #fca311;
+  font-size: 40px;
+}
+
+/* Burger menu styles */
+.burger-menu {
+  display: none;
+}
+
+.burger-icon {
+  font-size: 24px;
+  color: #fca311;
+  cursor: pointer;
+}
+
+.burger-dropdown {
+  display: none;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  background-color: #1e1f1a;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.burger-dropdown .nav-item {
+  display: block;
+  padding: 10px;
+  text-align: center;
+}
+
+.open .burger-dropdown {
+  display: block;
+}
+
+.nav-item.active {
+  color: #1e1f1a; /* Text color */
+  background-color: #fca311; /* Background color */
+  border-radius: 5px;
+  text-align: center;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Media query for desktop */
+@media screen and (min-width: 768px) {
+  .burger-menu {
+    display: flex;
+    justify-content: flex-start; /* Align menu to the left */
+    align-items: center; /* Center vertically */
     position: fixed;
-    bottom: 0;
+    top: 0;
     left: 0;
     width: 100%;
-    background-color: #1E1F1A;
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
+    background-color: #1e1f1a;
+    padding: 1rem;
     z-index: 1000;
   }
-  
-  .nav-item {
-    text-decoration: none;
-    color: #FCA311; 
-    font-size: 40px;
-    margin-top: 6px; 
+
+  .navbar {
+    display: none;
   }
-  
+
+  .app-name {
+    color: #fca311;
+    font-size: 24px;
+    margin: 0 auto; /* Center horizontally */
+  }
+
+  .nav-item.active {
+    color: #1e1f1a; /* Background color */
+    background-color: #fca311; /* Text color */
+    border-radius: 0px;
+    text-align: center;
+    width: auto;
+  }
+}
