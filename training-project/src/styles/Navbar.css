@@ -49,8 +49,8 @@
 }
 
 .nav-item.active {
-  color: #1e1f1a; /* Text color */
-  background-color: #fca311; /* Background color */
+  color: #1e1f1a; 
+  background-color: #fca311; 
   border-radius: 5px;
   text-align: center;
   width: 3rem;
@@ -64,8 +64,8 @@
 @media screen and (min-width: 768px) {
   .burger-menu {
     display: flex;
-    justify-content: flex-start; /* Align menu to the left */
-    align-items: center; /* Center vertically */
+    justify-content: flex-start; 
+    align-items: center; 
     position: fixed;
     top: 0;
     left: 0;
@@ -82,12 +82,12 @@
   .app-name {
     color: #fca311;
     font-size: 24px;
-    margin: 0 auto; /* Center horizontally */
+    margin: 0 auto; 
   }
 
   .nav-item.active {
-    color: #1e1f1a; /* Background color */
-    background-color: #fca311; /* Text color */
+    color: #1e1f1a;
+    background-color: #fca311; 
     border-radius: 0px;
     text-align: center;
     width: auto;

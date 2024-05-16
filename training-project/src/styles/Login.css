@@ -51,8 +51,8 @@
   }
 
   .motivation-q {
-    position: relative; /* Change to relative */
-    margin-top: 23rem; /* Use margin-top instead of absolute positioning */
+    position: relative; 
+    margin-top: 23rem; 
     background-color: #1e1f1a;
     color: white;
     border-radius: 10px;
@@ -113,7 +113,7 @@
   }
 
   .background-image {
-    display: none; /* Hide background image on desktop */
+    display: none; 
   }
 
   .content {

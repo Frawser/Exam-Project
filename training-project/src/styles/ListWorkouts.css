@@ -138,10 +138,10 @@
 
   .workouts ul li {
     margin-bottom: 1rem;
-    padding: 10px; /* Add padding to each workout item */
-    background-color: #2d2e28; /* Add a background color for better visibility */
-    border-radius: 5px; /* Add border radius for better aesthetics */
-    border: 1px solid #444; /* Add border for better separation */
+    padding: 10px; 
+    background-color: #2d2e28; 
+    border-radius: 5px; 
+    border: 1px solid #444; 
     list-style: none;
   }
 
