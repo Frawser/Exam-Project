@@ -209,4 +209,10 @@
     border-radius: 50%;
     margin-right: 10px;
   }
+  .preloaded-image {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-left: 10px;
+  }
 }
